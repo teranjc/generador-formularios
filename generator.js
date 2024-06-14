@@ -257,7 +257,9 @@ function deleteField(index) {
 // Function to clear the form inputs and toggle fields display
 function clearForm() {
   document.getElementById("formGenerator").reset(); // Reset the form inputs
-  toggleOptionsAndRulesFields(); // Toggle display of optionsField based on fieldType
+  toggleOptionsAndRulesFields();
+  const defaultRules = { required: true };
+  jsonEditorRules.set(defaultRules); // Toggle display of optionsField based on fieldType
 }
 
 // Function to save the current fields array to localStorage
