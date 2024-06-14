@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Formulario JSON</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Generador de Formulario JSON</h1>
+                <form id="formGenerator">
+                    <div class="form-floating mb-3">
+                        <select id="fieldType" class="form-select">
+                            <option value="Field">Field</option>
+                            <option value="SelectButton">SelectButton</option>
+                        </select>
+                        <label for="fieldType">Tipo de Campo</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="fieldLabel" class="form-control" placeholder=" " />
+                        <label for="fieldLabel">Etiqueta</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="fieldName" class="form-control" placeholder=" " />
+                        <label for="fieldName">Nombre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" id="fieldPlaceholder" class="form-control" placeholder=" " />
+                        <label for="fieldPlaceholder">Placeholder</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select id="fieldInputType" class="form-select">
+                            <option value="text">text</option>
+                            <option value="number">number</option>
+                        </select>
+                        <label for="fieldInputType">Tipo de Input</label>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="addField()">Agregar Campo</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>JSON Generado</h2>
+                <pre id="generatedJson" style="background-color: #f8f9fa; padding: 15px; border: 1px solid #ced4da; border-radius: 5px;"></pre>
+                <h2>Tabla de Campos</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Etiqueta</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fieldsTable">
+                        <!-- Filas generadas dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="generator.js"></script>
+</body>
+</html>
