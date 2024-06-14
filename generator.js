@@ -173,7 +173,7 @@ function addField() {
     field.placeholder = fieldPlaceholder;
   }
   if (fieldInputCoditional === "SI") {
-    field.fieldConditional = fieldConditional;
+    field.conditional = fieldConditional;
   }
   if (fieldType === "SelectButton" || fieldType === "Dropdown") {
     field.options = fieldOptions;
