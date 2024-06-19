@@ -20,22 +20,10 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/jsoneditor@9.0.3/dist/jsoneditor.min.js"></script>
 
-
     <style>
       /* Estilos para la tabla de campos */
-      #fieldsTable {
-        max-height: 400px; /* Altura máxima de la tabla */
-        overflow-y: auto; /* Habilita desplazamiento vertical */
-      }
-
-      /* Estilos para el JSON generado */
-      #generatedJson {
-        max-height: 500px; /* Altura máxima del JSON generado */
-        overflow-y: auto; /* Habilita desplazamiento vertical */
-        background-color: #f8f9fa;
-        padding: 15px;
-        border: 1px solid #ced4da;
-        border-radius: 5px;
+      #jsonVisual {
+        min-height: 400px; /* Altura máxima de la tabla */
       }
     </style>
   </head>
@@ -155,8 +143,23 @@
           </form>
         </div>
         <div class="col-md-8">
-          <h2>Tabla de Campos</h2>
-          <table class="table" id="fieldsTable">
+          <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand">Tabla de Campos</a>
+              <form class="d-flex" role="search">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  JSON
+                </button>
+              </form>
+            </div>
+          </nav>
+
+          <table class="table table-responsive-lg table-sm" id="">
             <thead>
               <tr>
                 <th>#</th>
@@ -172,16 +175,45 @@
               <!-- Filas generadas dinámicamente -->
             </tbody>
           </table>
-          <h2>JSON Generado</h2>
-          <pre
-            id="generatedJson"
-            style="
-              background-color: #f8f9fa;
-              padding: 15px;
-              border: 1px solid #ced4da;
-              border-radius: 5px;
-            "
-          ></pre>
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-scrollable modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    JSON Generado
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-6"> <pre
+                        id="generatedJson"
+                        style="
+                          background-color: #f8f9fa;
+                          padding: 15px;
+                          border: 1px solid #ced4da;
+                          border-radius: 5px;
+                        "
+                      ></pre></div>
+                      <div class="col-md-6"> <div id="jsonVisual"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

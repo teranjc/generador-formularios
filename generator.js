@@ -2,6 +2,7 @@ let fields = [];
 let jsonEditorOptions;
 let jsonEditorRules;
 let jsonEditorConditional;
+let jsonVisual;
 
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize JSON Editors
@@ -35,6 +36,24 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     }
   );
+
+  jsonVisual = new JSONEditor(document.getElementById("jsonVisual"), {
+    modes: ["text", "tree"],
+    onChange: function () {
+      // Optionally handle changes
+    },
+    enableSort: true, // Habilitar ordenamiento en el árbol
+    enableTransform: true, // Habilitar transformación en el árbol
+    enableContextMenu: true, // Habilitar menú contextual
+    enableDragDrop: true, // Habilitar arrastrar y soltar en el árbol
+    enableClipboard: false, // Habilitar portapapeles (copiar, cortar, pegar)
+    enableSearch: true, // Habilitar búsqueda en el árbol
+    contextMenu: {
+      actions: {
+        edit: false, // Habilitar edición
+      },
+    },
+  });
 
   jsonEditorConditional = new JSONEditor(
     document.getElementById("jsonEditorConditional"),
@@ -244,6 +263,8 @@ function updateTable() {
 
     tableBody.appendChild(row); // Append the row to the table body
   });
+  jsonVisual.set(fields);
+
 }
 
 // Function to delete a field from the fields array
