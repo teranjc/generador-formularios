@@ -21,128 +21,126 @@
     <script src="https://cdn.jsdelivr.net/npm/jsoneditor@9.0.3/dist/jsoneditor.min.js"></script>
 
     <style>
-      /* Estilos para la tabla de campos */
-      #jsonVisual {
-        min-height: 400px; /* Altura máxima de la tabla */
+
+      #generatedJson {
+        max-height: 600px;
+      }
+
+      .table-wrapper {
+        width: 100%;
+        height: 800px; /* Altura de ejemplo */
+        overflow: auto;
+      }
+
+      .table-wrapper table {
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      .table-wrapper table thead {
+        position: -webkit-sticky; /* Safari... */
+        position: sticky;
+        top: 0;
+        left: 0;
       }
     </style>
   </head>
   <body>
-    <div class="container-md mt-5 mb-5 pl-2 pr-2">
+    <div class="container-fluid mt-5 mb-5 pl-2 pr-2">
       <div class="row">
-        <div class="col-md-4">
-          <h1>Generador de Formulario JSON</h1>
-          <form id="formGenerator">
-            <div class="form-floating mb-3">
-              <select
-                id="fieldType"
-                class="form-select"
-                onchange="toggleOptionsAndRulesFields()"
-              >
-                <option value="Field">Field</option>
-                <option value="SelectButton">SelectButton</option>
-                <option value="Dropdown">Dropdown</option>
-              </select>
-              <label for="fieldType">Tipo de Campo</label>
-            </div>
-            <div
-              class="form-floating mb-3"
-              id="optionsField"
-              style="display: none"
-            >
-              <h6 for="fieldRules">Opciones (JSON)</h6>
-
-              <div id="jsonEditorOptions"></div>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                type="text"
-                id="fieldLabel"
-                class="form-control"
-                placeholder=" "
-              />
-              <label for="fieldCol">Titulo*</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                type="text"
-                id="fieldUnit"
-                class="form-control"
-                placeholder="kg"
-              />
-              <label for="fieldUnit">Unidad de medida</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                type="number"
-                id="fieldCol"
-                value="4"
-                class="form-control"
-                placeholder="col-4"
-                max="12"
-                min="4"
-              />
-              <label for="fieldLabel">Colunas | col-12 | col-6 | col- 4</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                type="text"
-                id="fieldName"
-                class="form-control"
-                placeholder="Campo*"
-              />
-              <label for="fieldName">Nombre en la BD</label>
-            </div>
-            <div class="form-floating mb-3">
-              <input
-                type="text"
-                id="fieldPlaceholder"
-                class="form-control"
-                placeholder=" "
-              />
-              <label for="fieldPlaceholder">Placeholder</label>
-            </div>
-            <div class="form-floating mb-3">
-              <select id="fieldInputType" class="form-select">
-                <option value="text">text</option>
-                <option value="number">number</option>
-                <option value="select">select</option>
-              </select>
-              <label for="fieldInputType">Tipo de Input</label>
-            </div>
-
-            <div class="form-floating mb-3" id="rulesField">
-              <h6 for="fieldRules">Reglas (JSON)</h6>
-              <div id="jsonEditorRules"></div>
-            </div>
-            <div class="form-floating mb-3">
-              <select
-                onchange="toggleConditional()"
-                id="fieldInputCoditional"
-                class="form-select"
-              >
-                <option value="NO">NO</option>
-                <option value="SI">SI</option>
-              </select>
-              <label for="fieldInputCoditional">Condicional</label>
-            </div>
-            <div
-              style="display: none"
-              class="form-floating mb-3"
-              id="conditionalField"
-            >
-              <h6 for="fieldConditionalJson">
-                Relacion de la condición (JSON)
-              </h6>
-              <div id="jsonEditorConditional"></div>
-            </div>
-
-            <button type="button" class="btn btn-primary" onclick="addField()">
-              Agregar Campo
-            </button>
-          </form>
+        <div class="col-md-5">
+          <div class="container">
+            <h1>Generador de Formulario JSON</h1>
+            <form id="formGenerator">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <select id="fieldType" class="form-select" onchange="toggleOptionsAndRulesFields()">
+                      <option value="Field">Field</option>
+                      <option value="SelectButton">SelectButton</option>
+                      <option value="Dropdown">Dropdown</option>
+                    </select>
+                    <label for="fieldType">Tipo de Campo</label>
+                  </div>
+                </div>
+               
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" id="fieldLabel" class="form-control" placeholder=" " />
+                    <label for="fieldLabel">Titulo*</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" id="fieldUnit" class="form-control" placeholder="kg" />
+                    <label for="fieldUnit">Unidad de medida</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input type="number" id="fieldCol" value="4" class="form-control" placeholder="col-4" max="12" min="4" />
+                    <label for="fieldCol">Columnas | col-12 | col-6 | col-4</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" id="fieldName" class="form-control" placeholder="Campo*" />
+                    <label for="fieldName">Nombre en la BD</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" id="fieldPlaceholder" class="form-control" placeholder=" " />
+                    <label for="fieldPlaceholder">Placeholder</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <select id="fieldInputType" class="form-select">
+                      <option value="text">text</option>
+                      <option value="number">number</option>
+                      <option value="select">select</option>
+                    </select>
+                    <label for="fieldInputType">Tipo de Input</label>
+                  </div>
+                </div>
+               
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <select onchange="toggleConditional()" id="fieldInputCoditional" class="form-select">
+                      <option value="NO">NO</option>
+                      <option value="SI">SI</option>
+                    </select>
+                    <label for="fieldInputCoditional">Condicional</label>
+                  </div>
+                </div>
+                <div class="col-md-6" id="optionsField" style="display: none">
+                  <div class="form-floating mb-3">
+                    <h6 for="fieldRules">Opciones (JSON)</h6>
+                    <div id="jsonEditorOptions"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3" id="rulesField">
+                    <h6 for="fieldRules">Reglas (JSON)</h6>
+                    <div id="jsonEditorRules"></div>
+                  </div>
+                </div>
+                <div class="col-md-6" id="conditionalField" style="display: none">
+                  <div class="form-floating mb-3">
+                    <h6 for="fieldConditionalJson">Relacion de la condición (JSON)</h6>
+                    <div id="jsonEditorConditional"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-primary" onclick="addField()">Agregar Campo</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
           <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
               <a class="navbar-brand">Tabla de Campos</a>
@@ -159,22 +157,24 @@
             </div>
           </nav>
 
-          <table class="table table-responsive-lg table-sm" id="">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Etiqueta</th>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Col</th>
-                <th>Unidad de Medida</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="fieldsTable">
-              <!-- Filas generadas dinámicamente -->
-            </tbody>
-          </table>
+          <div class="table-wrapper">
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Etiqueta</th>
+                  <th>Nombre</th>
+                  <th>Tipo</th>
+                  <th>Col</th>
+                  <th>Unidad de Medida</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="fieldsTable">
+                <!-- Filas generadas dinámicamente -->
+              </tbody>
+            </table>
+          </div>
           <div
             class="modal fade"
             id="exampleModal"
@@ -198,16 +198,18 @@
                 <div class="modal-body">
                   <div class="container-fluid">
                     <div class="row">
-                      <div class="col-md-6"> <pre
-                        id="generatedJson"
-                        style="
-                          background-color: #f8f9fa;
-                          padding: 15px;
-                          border: 1px solid #ced4da;
-                          border-radius: 5px;
-                        "
-                      ></pre></div>
-                      <div class="col-md-6"> <div id="jsonVisual"></div></div>
+                      <div class="col-md-12">
+                        <pre
+                          id="generatedJson"
+                          style="
+                            background-color: #f8f9fa;
+                            padding: 15px;
+                            border: 1px solid #ced4da;
+                            border-radius: 5px;
+                          "
+                        ></pre>
+                      </div>
+                      <div class="col-md-12"><div id="jsonVisual"></div></div>
                     </div>
                   </div>
                 </div>
