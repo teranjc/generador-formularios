@@ -21,7 +21,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jsoneditor@9.0.3/dist/jsoneditor.min.js"></script>
 
     <style>
-
       #generatedJson {
         max-height: 600px;
       }
@@ -55,7 +54,11 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-floating mb-3">
-                    <select id="fieldType" class="form-select" onchange="toggleOptionsAndRulesFields()">
+                    <select
+                      id="fieldType"
+                      class="form-select"
+                      onchange="toggleOptionsAndRulesFields()"
+                    >
                       <option value="Field">Field</option>
                       <option value="SelectButton">SelectButton</option>
                       <option value="Dropdown">Dropdown</option>
@@ -63,34 +66,65 @@
                     <label for="fieldType">Tipo de Campo</label>
                   </div>
                 </div>
-               
+
                 <div class="col-md-6">
                   <div class="form-floating mb-3">
-                    <input type="text" id="fieldLabel" class="form-control" placeholder=" " />
+                    <input
+                      type="text"
+                      id="fieldLabel"
+                      class="form-control"
+                      placeholder=" "
+                    />
                     <label for="fieldLabel">Titulo*</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating mb-3">
-                    <input type="text" id="fieldUnit" class="form-control" placeholder="kg" />
-                    <label for="fieldUnit">Unidad de medida</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating mb-3">
-                    <input type="number" id="fieldCol" value="4" class="form-control" placeholder="col-4" max="12" min="4" />
-                    <label for="fieldCol">Columnas | col-12 | col-6 | col-4</label>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-floating mb-3">
-                    <input type="text" id="fieldName" class="form-control" placeholder="Campo*" />
+                    <input
+                      type="text"
+                      id="fieldName"
+                      class="form-control"
+                      placeholder="Campo*"
+                    />
                     <label for="fieldName">Nombre en la BD</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating mb-3">
-                    <input type="text" id="fieldPlaceholder" class="form-control" placeholder=" " />
+                    <input
+                      type="number"
+                      id="fieldCol"
+                      value="4"
+                      class="form-control"
+                      placeholder="col-4"
+                      max="12"
+                      min="4"
+                    />
+                    <label for="fieldCol"
+                      >Columnas | col-12 | col-6 | col-4</label
+                    >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      id="fieldUnit"
+                      class="form-control"
+                      placeholder="kg"
+                    />
+                    <label for="fieldUnit">Unidad de medida</label>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      id="fieldPlaceholder"
+                      class="form-control"
+                      placeholder=" "
+                    />
                     <label for="fieldPlaceholder">Placeholder</label>
                   </div>
                 </div>
@@ -104,10 +138,14 @@
                     <label for="fieldInputType">Tipo de Input</label>
                   </div>
                 </div>
-               
+
                 <div class="col-md-6">
                   <div class="form-floating mb-3">
-                    <select onchange="toggleConditional()" id="fieldInputCoditional" class="form-select">
+                    <select
+                      onchange="toggleConditional()"
+                      id="fieldInputCoditional"
+                      class="form-select"
+                    >
                       <option value="NO">NO</option>
                       <option value="SI">SI</option>
                     </select>
@@ -126,19 +164,30 @@
                     <div id="jsonEditorRules"></div>
                   </div>
                 </div>
-                <div class="col-md-6" id="conditionalField" style="display: none">
+                <div
+                  class="col-md-6"
+                  id="conditionalField"
+                  style="display: none"
+                >
                   <div class="form-floating mb-3">
-                    <h6 for="fieldConditionalJson">Relacion de la condición (JSON)</h6>
+                    <h6 for="fieldConditionalJson">
+                      Relacion de la condición (JSON)
+                    </h6>
                     <div id="jsonEditorConditional"></div>
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <button type="button" class="btn btn-primary" onclick="addField()">Agregar Campo</button>
+                <div class="col-md-12 d-grid gap-2">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="addField()"
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
             </form>
           </div>
-          
         </div>
         <div class="col-md-7">
           <nav class="navbar bg-body-tertiary">
@@ -198,6 +247,15 @@
                 <div class="modal-body">
                   <div class="container-fluid">
                     <div class="row">
+                      <div class="col-md-12 mb-2 d-grid gap-2">
+                        <button
+                          class="btn btn-danger pb-2"
+                          type="button"
+                          onclick="copyToClipboard()"
+                        >
+                          Copiar JSON
+                        </button>
+                      </div>
                       <div class="col-md-12">
                         <pre
                           id="generatedJson"

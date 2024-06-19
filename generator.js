@@ -4,6 +4,18 @@ let jsonEditorRules;
 let jsonEditorConditional;
 let jsonVisual;
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  },
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize JSON Editors
   jsonEditorOptions = new JSONEditor(
@@ -264,7 +276,6 @@ function updateTable() {
     tableBody.appendChild(row); // Append the row to the table body
   });
   jsonVisual.set(fields);
-
 }
 
 // Function to delete a field from the fields array
@@ -299,5 +310,52 @@ function loadFieldsFromLocalStorage() {
     fields = JSON.parse(storedFields); // Parse stored fields into the fields array
     generateJson(); // Generate and display the JSON representation
     updateTable(); // Update the HTML table with the loaded fields
+  }
+}
+
+function copyToClipboard() {
+  const pre = document.getElementById("generatedJson");
+  const text = pre.innerText;
+
+  if (navigator.clipboard) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        Toast.fire({
+          icon: "success",
+          title: "Texto copiado al portapapeles",
+        });
+      })
+      .catch((err) => {
+        Toast.fire({
+          icon: "error",
+          title: "Error al copiar: ",
+          err,
+        });
+      });
+  } else {
+    // Fallback para navegadores que no soportan navigator.clipboard
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // Para dispositivos móviles
+
+    try {
+      document.execCommand("copy");
+      Toast.fire({
+        icon: "success",
+        title: "Texto copiado al portapapeles",
+      });
+    } catch (err) {
+      Toast.fire({
+        icon: "error",
+        title: "Error al copiar: ",
+        err,
+      });
+    }
+
+    document.body.removeChild(textarea);
   }
 }
